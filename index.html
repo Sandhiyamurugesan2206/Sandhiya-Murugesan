@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>Sandhiya M - Portfolio</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <style>
+    :root{
+      --theme:#0077b6;
+      --theme-dark:#023e8a;
+      --bg-soft:#eef2f6;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+      scroll-behavior: smooth;
+    }
+
+    .navbar { background:#fff; }
+    .navbar-brand { font-weight:700; color:var(--theme) !important; }
+    .navbar-nav .nav-link { color:#333; transition: color .3s, transform .3s; }
+    .navbar-nav .nav-link:hover { color:var(--theme); transform: translateY(-2px); }
+
+    .hero {
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: left;
+      background: linear-gradient(135deg, #eaf6fb, #d0efff);
+      padding: 100px 0 70px;
+    }
+    .hero h1 { font-size: 2.8rem; font-weight: 800; }
+    .hero .subline { color:var(--theme); font-weight:600; }
+
+    /* Typewriter caret */
+    .typed-caret {
+      display:inline-block;
+      width: 2px;
+      height: 1em;
+      background: #222;
+      margin-left: 4px;
+      animation: blink .9s steps(1) infinite;
+      vertical-align: -2px;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    .about-card,
+    .exp-card,
+    .skill-card,
+    .cert-card {
+      background:#fff;
+      border-radius:10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,.05);
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+    .about-card:hover,
+    .exp-card:hover,
+    .skill-card:hover,
+    .cert-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 24px rgba(0,0,0,.12);
+    }
+
+    .exp-card { overflow:hidden; display:flex; flex-direction:column; height:100%; }
+    .exp-card img {
+      width:100%;
+      height:250px;
+      object-fit:contain;
+      background:#fff;
+      padding:10px;
+      display:block;
+    }
+    .exp-card .card-body { flex:1; }
+
+    .timeline { position:relative; margin-left:20px; }
+    .timeline::before{
+      content:'';
+      position:absolute; top:0; left:10px; width:4px; height:100%;
+      background:var(--theme);
+    }
+    .timeline-item { position:relative; margin-bottom:30px; padding-left:50px; }
+    .timeline-dot{
+      position:absolute; left:-2px; top:10px; width:30px; height:30px;
+      background:var(--theme); border-radius:50%; border:3px solid #fff;
+      box-shadow: 0 0 0 3px var(--theme);
+      display:flex; align-items:center; justify-content:center; color:#fff; font-size:14px;
+    }
+    .timeline-content{
+      background:#fff; padding:15px; border-radius:10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,.05);
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+    .timeline-content:hover{ transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,.1); }
+    .timeline-date{ font-weight:700; color:var(--theme); margin-bottom:5px; display:inline-block; }
+
+    /* Skill cards */
+    .skill-card{
+      display:flex; align-items:center; justify-content:center; flex-direction:column;
+      height:150px; padding:20px;
+    }
+    .skill-card img{
+      width:60px; height:60px; object-fit:contain; margin-bottom:10px; display:block;
+    }
+    .skill-card p{ font-weight:600; color:#333; font-size:14px; margin:0; text-align:center; }
+
+    /* Projects */
+    #projects{ background:#f8f9fa; }
+    .project-card{
+      border:none; border-radius:10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,.05);
+      display:flex; flex-direction:column; height:100%;
+    }
+    .project-card img{
+      height:220px; object-fit:cover;
+    }
+    .project-card .card-body{ display:flex; flex-direction:column; }
+    .project-card .card-footer{ background:#fff; border:0; padding-bottom:1rem; }
+
+    /* Hide default Bootstrap carousel arrows */
+    #projectCarousel .carousel-control-prev,
+    #projectCarousel .carousel-control-next { display:none !important; }
+
+    /* Custom bottom arrows */
+    .carousel-arrows{ text-align:center; margin-top:20px; }
+    .carousel-arrows button{
+      background:none; border:none; font-size:22px; color:var(--theme);
+      margin:0 15px; cursor:pointer; transition: color .2s, transform .2s;
+    }
+    .carousel-arrows button:hover{ color:var(--theme-dark); transform: translateY(-2px); }
+
+    /* Certifications */
+    .cert-link{ color:inherit; text-decoration:none; transition: color .3s ease; }
+    .cert-link:hover{ color:var(--theme); }
+
+    /* Contact */
+    .social-link{ color:#000; transition: color .3s ease, transform .2s ease; }
+    .social-link:hover{ color:var(--theme); transform: scale(1.12); }
+    #copyEmailBtn{ transition: background-color .3s ease, transform .2s ease; border-radius:50%; padding:6px 10px; }
+    #copyEmailBtn:hover{ background:var(--theme); color:#fff; transform: scale(1.08); }
+
+    footer{
+      background:var(--theme); color:#fff; text-align:center; padding:22px 0;
+    }
+    footer a{ color:#d0efff; text-decoration:none; margin:0 6px; }q
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="navbar navbar-expand-lg fixed-top shadow-sm">
+  <div class="container">
+    <a class="navbar-brand" href="#home">Sandhiya M</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="#education">Education</a></li>
+        <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
+        <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+        <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+        <li class="nav-item"><a class="nav-link" href="#certifications">Certifications</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home" data-aos="fade-up">
+  <div class="container">
+    <div class="row align-items-center gy-4">
+      <div class="col-md-7" data-aos="fade-right">
+        <p style="color:var(--theme); font-weight:600; margin-bottom:6px;">Hello, I'm</p>
+        <h1>Sandhiya M</h1>
+
+        <!-- ANIMATION: Typing / Cycling text -->
+        <h3 class="subline">
+          <span id="typed"></span><span class="typed-caret"></span>
+        </h3>
+        <!-- /ANIMATION -->
+
+        <p class="mt-3" style="font-size:1.05rem;">
+          I’m passionate about turning ideas into reality through clean, efficient, and creative code.
+          My journey in tech is fueled by curiosity and a constant desire to learn, innovate,
+          and build solutions that make a real difference.
+        </p>
+        <div class="mt-4">
+          <a href="resume.pdf" class="btn btn-primary me-2" style="background:var(--theme); border:none;" target="_blank">Download CV</a>
+          <a href="#contact" class="btn btn-outline-primary" style="border-color:var(--theme); color:var(--theme);">Let's Connect</a>
+        </div>
+      </div>
+
+      <div class="col-md-5 text-center" data-aos="zoom-in">
+        <img src="proffesional.jpg" alt="Sandhiya" class="img-fluid hero-photo" style="max-width:70%;">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="py-5" id="about" style="background:#f8f9fa;">
+  <div class="container">
+    <div class="about-card p-4 mx-auto" style="max-width:900px;" data-aos="fade-up">
+      <h2 class="text-center mb-4" style="color:var(--theme); font-weight:700;">About Me</h2>
+      <p style="font-size:1.05rem; text-align:justify;">
+        I’m Sandhiya M, a passionate Computer Science Engineering student specializing in Full Stack Development with skills in Python, C, HTML, Bootstrap, and database management using XAMPP.
+        I have built projects like a responsive Car Rental System with multi-role authentication and an intuitive pastel-themed UI.
+        I enjoy combining creativity with technical precision to develop user-friendly, functional, and visually appealing applications.
+        My strengths include analytical thinking, problem-solving, and writing clean, efficient code. Currently, I’m enhancing my front-end expertise with responsive layouts, smooth transitions, and professional UI/UX practices.
+        I aspire to work in a leading MNC where I can apply my skills to impactful, real-world projects. I believe technology should create both innovation and meaningful user experiences. My ultimate goal is to grow as a professional while making a positive difference globally through tech.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section class="py-5" id="education" style="background:var(--bg-soft);">
+  <div class="container">
+    <h2 class="text-center mb-5" style="color:var(--theme); font-weight:700;" data-aos="fade-down">Education</h2>
+    <div class="timeline">
+
+      <div class="timeline-item" data-aos="fade-up" data-aos-delay="100">
+        <div class="timeline-dot"><i class="fas fa-graduation-cap"></i></div>
+        <div class="timeline-content">
+          <span class="timeline-date">2023 – 2027</span>
+          <h5>B.E. Computer Science & Engineering</h5>
+          <p>M Kumarasamy College of Engineering, Thalavapalayam, Karur</p>
+          <p><strong>CGPA:</strong> 8.04 (Till 4th Semester)</p>
+        </div>
+      </div>
+
+      <div class="timeline-item" data-aos="fade-up" data-aos-delay="200">
+        <div class="timeline-dot"><i class="fas fa-school"></i></div>
+        <div class="timeline-content">
+          <span class="timeline-date">2021 – 2023</span>
+          <h5>Higher Secondary Certificate (HSC)</h5>
+          <p>Sowdambikaa Matric Hr. Sec School, Thottiyam</p>
+          <p><strong>Percentage:</strong> 91.5%</p>
+        </div>
+      </div>
+
+      <div class="timeline-item" data-aos="fade-up" data-aos-delay="300">
+        <div class="timeline-dot"><i class="fas fa-book"></i></div>
+        <div class="timeline-content">
+          <span class="timeline-date">2019 – 2021</span>
+          <h5>Secondary School Leaving Certificate (SSLC)</h5>
+          <p>Infant Jesus Matriculation School, Kattuputhur</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="py-5" id="experience" style="background:#f8f9fa;">
+  <div class="container">
+    <h2 class="text-center mb-5" style="color:var(--theme); font-weight:700;" data-aos="fade-down">Experience</h2>
+    <div class="row justify-content-center g-4">
+      <div class="col-md-5" data-aos="flip-left" data-aos-delay="100">
+        <div class="exp-card">
+          <img src="klabslogo.webp" class="card-img-top" alt="Intern at K Labs">
+          <div class="card-body text-center p-4">
+            <h5 class="card-title">Intern @ K Labs</h5>
+            <p class="card-text">Gained practical industry experience in real-world software development projects and enhanced technical expertise in full-stack development.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-5" data-aos="flip-right" data-aos-delay="200">
+        <div class="exp-card">
+          <img src="tih.jpg" class="card-img-top" alt="Member at TIH">
+          <div class="card-body text-center p-4">
+            <h5 class="card-title">Member @ TIH</h5>
+            <p class="card-text">Actively contributing as a member of the Technology Innovation Hub, participating in advanced research and development initiatives.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- SKILLS -->
+<section class="py-5" id="skills" style="background:var(--bg-soft);">
+  <div class="container p-4 rounded shadow-sm" style="background:#fff;">
+    <h2 class="text-center mb-5" style="color:var(--theme); font-weight:700;" data-aos="fade-down">Technical Skills</h2>
+    <div class="row text-center g-4">
+      <div class="col-6 col-md-3" data-aos="zoom-in" data-aos-delay="100">
+        <div class="skill-card"><img src="java.png" alt="Java"><p>Java</p></div>
+      </div>
+      <div class="col-6 col-md-3" data-aos="zoom-in" data-aos-delay="200">
+        <div class="skill-card"><img src="python.jpeg" alt="Python"><p>Python</p></div>
+      </div>
+      <div class="col-6 col-md-3" data-aos="zoom-in" data-aos-delay="300">
+        <div class="skill-card"><img src="c.png" alt="JavaScript"><p>JavaScript</p></div>
+      </div>
+      <div class="col-6 col-md-3" data-aos="zoom-in" data-aos-delay="400">
+        <div class="skill-card"><img src="html.png" alt="HTML5"><p>HTML5</p></div>
+      </div>
+
+      <div class="col-6 col-md-3" data-aos="zoom-in" data-aos-delay="500">
+        <div class="skill-card"><img src="css.png" alt="CSS3"><p>CSS3</p></div>
+      </div>
+      <div class="col-6 col-md-3" data-aos="zoom-in" data-aos-delay="600">
+        <div class="skill-card"><img src="dotnet.jpeg" alt="Bootstrap"><p>C# and .NET</p></div>
+      </div>
+      <div class="col-6 col-md-3" data-aos="zoom-in" data-aos-delay="700">
+        <div class="skill-card"><img src="mysql.png" alt="SQL"><p>SQL</p></div>
+      </div>
+      <div class="col-6 col-md-3" data-aos="zoom-in" data-aos-delay="800">
+        <div class="skill-card"><img src="php.jpg" alt="PHP"><p>PHP</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOFT SKILLS -->
+<section class="py-5" id="soft-skills" style="background:var(--bg-soft);">
+  <div class="container p-4 rounded shadow-sm" style="background:#fff;">
+    <h2 class="text-center mb-5" style="color:var(--theme); font-weight:700;" data-aos="fade-down">Soft Skills</h2>
+    <div class="row text-center g-4">
+      <div class="col-6 col-md-4 col-lg-2" data-aos="zoom-in" data-aos-delay="100">
+        <div class="skill-card"><img src="comm.jpeg" alt="Communication"><p>Communication</p></div>
+      </div>
+      <div class="col-6 col-md-4 col-lg-2" data-aos="zoom-in" data-aos-delay="200">
+        <div class="skill-card"><img src="team.jpg" alt="Team Work"><p>Team Work</p></div>
+      </div>
+      <div class="col-6 col-md-4 col-lg-2" data-aos="zoom-in" data-aos-delay="300">
+        <div class="skill-card"><img src="time.jpeg" alt="Time Management"><p>Time Management</p></div>
+      </div>
+      <div class="col-6 col-md-4 col-lg-2" data-aos="zoom-in" data-aos-delay="400">
+        <div class="skill-card"><img src="problem.jpg" alt="Problem Solving"><p>Problem Solving</p></div>
+      </div>
+      <div class="col-6 col-md-4 col-lg-2" data-aos="zoom-in" data-aos-delay="500">
+        <div class="skill-card"><img src="adap.jpeg" alt="Adaptability"><p>Adaptability</p></div>
+      </div>
+      <div class="col-6 col-md-4 col-lg-2" data-aos="zoom-in" data-aos-delay="600">
+        <div class="skill-card"><img src="leader.jpeg" alt="Leadership"><p>Leadership</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="py-5" style="background:#f8f9fa;">
+  <div class="container" data-aos="fade-up">
+    <h2 class="text-center mb-5" style="color:var(--theme); font-weight:700;" data-aos="fade-down">Projects</h2>
+
+    <div id="projectCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+      <div class="carousel-inner">
+
+        <!-- Slide 1 -->
+        <div class="carousel-item active">
+          <div class="row g-4">
+            <div class="col-md-6 d-flex" data-aos="zoom-in" data-aos-delay="100">
+              <div class="card project-card flex-fill">
+                <img src="FTF.png" class="card-img-top" alt="Farm to Fork">
+                <div class="card-body">
+                  <h5 class="card-title fw-bold">Farm to Fork</h5>
+                  <p class="text-muted mb-2">
+                    Tech Stack:
+                    <i class="fab fa-html5"></i> <i class="fab fa-css3-alt"></i>
+                    <i class="fab fa-js"></i> <i class="fab fa-python"></i>
+                  </p>
+                  <p class="card-text">A platform connecting farmers directly with consumers for fresh produce, eliminating middlemen and ensuring fair pricing.</p>
+                  <div class="mt-auto">
+                    <a href="#" target="_blank" class="btn btn-outline-dark btn-sm"><i class="fab fa-github"></i> GitHub</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 d-flex" data-aos="zoom-in" data-aos-delay="200">
+              <div class="card project-card flex-fill">
+                <img src="smart.png" class="card-img-top" alt="Smart Infrastructure and Resource Management">
+                <div class="card-body">
+                  <h5 class="card-title fw-bold">Smart Infrastructure and Resource Management</h5>
+                  <p class="text-muted mb-2">
+                    Tech Stack:
+                    <i class="fab fa-html5"></i> <i class="fab fa-css3-alt"></i> <i class="fab fa-js"></i>
+                  </p>
+                  <p class="card-text">A smart city system optimizing infrastructure usage and resource allocation with real-time monitoring and AI-based analysis.</p>
+                  <div class="mt-auto">
+                    <a href="#" target="_blank" class="btn btn-outline-dark btn-sm"><i class="fab fa-github"></i> GitHub</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="carousel-item">
+          <div class="row g-4">
+            <div class="col-md-6 d-flex" data-aos="zoom-in" data-aos-delay="100">
+              <div class="card project-card flex-fill">
+                <img src="car.png" class="card-img-top" alt="Car Rental System">
+                <div class="card-body">
+                  <h5 class="card-title fw-bold">Car Rental System</h5>
+                  <p class="text-muted mb-2">
+                    Tech Stack:
+                    <i class="fab fa-html5"></i> <i class="fab fa-css3-alt"></i>
+                    <i class="fab fa-js"></i> <i class="fas fa-database"></i>
+                  </p>
+                  <p class="card-text">A responsive system with multi-role authentication for car owners and renters, complete with booking and availability tracking.</p>
+                  <div class="mt-auto">
+                    <a href="#" target="_blank" class="btn btn-outline-dark btn-sm"><i class="fab fa-github"></i> GitHub</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 d-flex" data-aos="zoom-in" data-aos-delay="200">
+              <div class="card project-card flex-fill">
+                <img src="dronee.png" class="card-img-top" alt="Drone Management System">
+                <div class="card-body">
+                  <h5 class="card-title fw-bold">Drone Management System</h5>
+                  <p class="text-muted mb-2">
+                    Tech Stack:
+                    <i class="fab fa-python"></i> <i class="fab fa-js"></i> <i class="fas fa-database"></i>
+                  </p>
+                  <p class="card-text">A centralized platform for drone operation scheduling, mission tracking, and data analysis for various applications.</p>
+                  <div class="mt-auto">
+                    <a href="#" target="_blank" class="btn btn-outline-dark btn-sm"><i class="fab fa-github"></i> GitHub</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="carousel-item">
+          <div class="row g-4">
+            <div class="col-md-6 d-flex" data-aos="zoom-in" data-aos-delay="100">
+              <div class="card project-card flex-fill">
+                <img src="hemoscan.png" class="card-img-top" alt="HemoScan AI">
+                <div class="card-body">
+                  <h5 class="card-title fw-bold">HemoScan AI</h5>
+                  <p class="text-muted mb-2">
+                    Tech Stack:
+                    <i class="fab fa-python"></i> <i class="fas fa-brain"></i> <i class="fas fa-database"></i>
+                  </p>
+                  <p class="card-text">AI-powered blood analysis tool for early detection of diseases using image recognition and predictive analytics.</p>
+                  <div class="mt-auto">
+                    <a href="#" target="_blank" class="btn btn-outline-dark btn-sm"><i class="fab fa-github"></i> GitHub</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 d-flex" data-aos="zoom-in" data-aos-delay="200">
+              <div class="card project-card flex-fill">
+                <img src="currency.png" class="card-img-top" alt="Currency Converter">
+                <div class="card-body">
+                  <h5 class="card-title fw-bold">Currency Converter</h5>
+                  <p class="text-muted mb-2">
+                    Tech Stack:
+                    <i class="fab fa-java"></i> <i class="fas fa-brain"></i> <i class="fab fa-html5"></i>
+                  </p>
+                  <p class="card-text">A web-based application that converts currencies in real-time using live exchange rate APIs.</p>
+                  <div class="mt-auto">
+                    <a href="#" target="_blank" class="btn btn-outline-dark btn-sm"><i class="fab fa-github"></i> GitHub</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Custom bottom arrows only -->
+      <div class="carousel-arrows" data-aos="fade-up">
+        <button type="button" data-bs-target="#projectCarousel" data-bs-slide="prev" aria-label="Previous">&#8592;</button>
+        <button type="button" data-bs-target="#projectCarousel" data-bs-slide="next" aria-label="Next">&#8594;</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications" class="py-5" style="background:var(--bg-soft);">
+  <div class="container">
+    <h2 class="text-center mb-5" style="color:var(--theme); font-weight:700;" data-aos="fade-down">Certifications</h2>
+    <div class="row g-4">
+
+      <!-- Cert 1 -->
+      <div class="col-md-6 col-lg-6 d-flex" data-aos="flip-left" data-aos-delay="100">
+        <div class="card shadow-sm border-0 flex-fill text-center cert-card" data-bs-toggle="modal" data-bs-target="#cert1Modal">
+          <div class="card-body">
+            <h5 class="card-title fw-bold">
+              <!-- heading link triggers modal too -->
+              <a class="cert-link" data-bs-toggle="modal" data-bs-target="#cert1Modal">Blockchain and Its Applications</a>
+            </h5>
+            <p class="text-muted mb-2">Swayam NPTEL</p>
+            <p class="card-text">Certified for completing the course on blockchain fundamentals, smart contracts, and its applications.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cert 2 -->
+      <div class="col-md-6 col-lg-6 d-flex" data-aos="flip-left" data-aos-delay="200">
+        <div class="card shadow-sm border-0 flex-fill text-center cert-card" data-bs-toggle="modal" data-bs-target="#cert2Modal">
+          <div class="card-body">
+            <h5 class="card-title fw-bold">
+              <a class="cert-link" data-bs-toggle="modal" data-bs-target="#cert2Modal">Pragati Path to Future - Cohort 3</a>
+            </h5>
+            <p class="text-muted mb-2">Infosys Springboard</p>
+            <p class="card-text">Selected for Cohort 3 of the Pragati Path program to enhance future-ready skills and career preparation.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cert 3 -->
+      <div class="col-md-6 col-lg-6 d-flex" data-aos="flip-left" data-aos-delay="300">
+        <div class="card shadow-sm border-0 flex-fill text-center cert-card" data-bs-toggle="modal" data-bs-target="#cert3Modal">
+          <div class="card-body">
+            <h5 class="card-title fw-bold">
+              <a class="cert-link" data-bs-toggle="modal" data-bs-target="#cert3Modal">Principles of Generative AI</a>
+            </h5>
+            <p class="text-muted mb-2">Infosys Springboard</p>
+            <p class="card-text">Learned the core concepts of generative AI models, their applications, and ethical considerations.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cert 4 -->
+      <div class="col-md-6 col-lg-6 d-flex" data-aos="flip-left" data-aos-delay="400">
+        <div class="card shadow-sm border-0 flex-fill text-center cert-card" data-bs-toggle="modal" data-bs-target="#cert4Modal">
+          <div class="card-body">
+            <h5 class="card-title fw-bold">
+              <a class="cert-link" data-bs-toggle="modal" data-bs-target="#cert4Modal">Applied GenAI Certification</a>
+            </h5>
+            <p class="text-muted mb-2">Certification Course</p>
+            <p class="card-text">Completed hands-on training in applying Generative AI techniques for real-world problem solving.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATE MODALS -->
+<div class="modal fade" id="cert1Modal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content border-0">
+      <div class="modal-header border-0">
+        <!-- built-in cross/close -->
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <img src="nptel.png" class="img-fluid rounded" alt="Blockchain Certificate">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="cert2Modal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content border-0">
+      <div class="modal-header border-0">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <img src="pragathi.png" class="img-fluid rounded" alt="Pragati Path Certificate">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="cert3Modal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content border-0">
+      <div class="modal-header border-0">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <img src="principles.png" class="img-fluid rounded" alt="Generative AI Certificate">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="cert4Modal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content border-0">
+      <div class="modal-header border-0">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <img src="Appliedgenai.png" class="img-fluid rounded" alt="Applied GenAI Certificate">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section id="contact" class="py-5" style="background:#fefcf9;" data-aos="zoom-in">
+  <div class="container text-center">
+    <h2 class="fw-bold mb-3" style="color:#000;">Contact Me</h2>
+    <h4>
+      <a href="mailto:sandhiyamurugesan226@gmail.com" class="text-decoration-none" style="color:var(--theme);">
+        sandhiyamurugesan226@gmail.com
+      </a>
+      <button id="copyEmailBtn" class="btn btn-sm btn-outline-primary ms-2">
+        <i class="fas fa-clipboard"></i>
+      </button>
+    </h4>
+    <p class="text-muted mb-4">Feel free to contact me with any inquiries or questions!</p>
+
+    <div class="mt-4">
+      <a href="https://www.linkedin.com/in/sandhiya-murugesan-a0ab8728a/" target="_blank" class="mx-3 social-link"><i class="fab fa-linkedin fa-2x"></i></a>
+      <a href="https://github.com/Sandhiyamurugesan2206" target="_blank" class="mx-3 social-link"><i class="fab fa-github fa-2x"></i></a>
+      <a href="https://www.instagram.com/sandhiya._.murugesan" target="_blank" class="mx-3 social-link"><i class="fab fa-instagram fa-2x"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 Sandhiya M | All Rights Reserved</p>
+  <p>
+    <a href="https://github.com/Sandhiyamurugesan2206" target="_blank">GitHub</a> |
+    <a href="https://www.linkedin.com/in/sandhiya-murugesan-a0ab8728a/" target="_blank">LinkedIn</a> |
+    <a href="mailto:sandhiyamurugesan226@gmail.com">Email</a>
+  </p>
+</footer>
+
+<!-- JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- AOS (Animate On Scroll) JS -->
+<!-- ANIMATION: AOS init -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  // AOS re-animates when scrolling down & up
+  AOS.init({
+    duration: 900,
+    once: false,  
+    mirror: true, 
+    easing: 'ease-in-out'
+  });
+</script>
+
+
+
+<!-- ANIMATION: Typed / Cycling text logic -->
+<script>
+  // Edit your rotating titles here:
+  const typedPhrases = [
+    "Aspiring Software Engineer",
+    "Full Stack Developer",
+    "Tech Enthusiast",
+    "UI/UX Learner"
+  ];
+  const el = document.getElementById("typed");
+
+  let i = 0;         // which phrase
+  let j = 0;         // which character
+  let isDeleting = false;
+  let typingSpeed = 70;   // typing speed ms
+  let pauseBetween = 1200; // pause when a word completes
+
+  function typeLoop(){
+    const current = typedPhrases[i];
+    if(!isDeleting){
+      // typing forward
+      el.textContent = current.slice(0, j + 1);
+      j++;
+      if(j === current.length){
+        // word complete -> pause then start deleting
+        setTimeout(() => { isDeleting = true; }, pauseBetween);
+      }
+    } else {
+      // deleting back
+      el.textContent = current.slice(0, j - 1);
+      j--;
+      if(j === 0){
+        isDeleting = false;
+        i = (i + 1) % typedPhrases.length;
+      }
+    }
+    const speed = isDeleting ? typingSpeed * 0.6 : typingSpeed;
+    setTimeout(typeLoop, speed);
+  }
+  typeLoop();
+</script>
+
+<!-- Utilities: Copy email button -->
+<script>
+  document.getElementById("copyEmailBtn").addEventListener("click", function() {
+    navigator.clipboard.writeText("sandhiyamurugesan226@gmail.com").then(() => {
+      this.innerHTML = '<i class="fas fa-check"></i>';
+      setTimeout(() => this.innerHTML = '<i class="fas fa-clipboard"></i>', 1800);
+    });
+  });
+</script>
+
+</body>
+</html>
