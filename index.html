@@ -152,7 +152,68 @@
     footer{
       background:var(--theme); color:#fff; text-align:center; padding:22px 0;
     }
-    footer a{ color:#d0efff; text-decoration:none; margin:0 6px; }q
+    footer a{ color:#d0efff; text-decoration:none; margin:0 6px; }
+    /* Card baseline tweaks (keeps style consistent) */
+.cert-card {
+  border-radius: 12px;
+  overflow: hidden;
+  max-width: 100%;
+  transition: transform .25s ease, box-shadow .25s ease;
+  cursor: pointer;
+  background: white; /* or use var(--bg-soft) if you prefer card color */
+}
+.cert-card:hover { transform: translateY(-6px); box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
+
+/* Centered-card size (prevents full column fill) */
+.cert-card--center {
+  /* a comfortable max width so it looks centered and not too wide */
+  max-width: 520px;
+  width: 100%;
+}
+
+/* Card body padding to make room for the button */
+.cert-card .card-body { padding-bottom: 1.25rem; position: relative; }
+
+/* Action area (icon + button) */
+.cert-action { gap: 8px; }
+
+/* small icon style (inherits theme color) */
+.cert-icon { color: var(--theme); display: inline-block; }
+
+/* Button matching theme variables */
+.btn-view-cert {
+  display: inline-block;
+  font-weight: 600;
+  padding: .45rem .9rem;
+  border-radius: 8px;
+  border: 1px solid var(--theme);
+  background: transparent;
+  color: var(--theme);
+  text-decoration: none;
+  line-height: 1;
+  transition: background .15s ease, color .15s ease, transform .12s ease;
+}
+
+/* Hover/focus states */
+.btn-view-cert:hover, .btn-view-cert:focus {
+  background: var(--theme);
+  color: #fff;
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+
+/* If you want a filled variant (use .btn-view-cert--solid) */
+.btn-view-cert--solid {
+  background: var(--theme);
+  color: #fff;
+  border-color: var(--theme);
+}
+
+/* Responsive: reduce max-width on small screens (optional) */
+@media (max-width: 576px) {
+  .cert-card--center { max-width: 92%; }
+}
+
   </style>
 </head>
 <body>
@@ -199,7 +260,7 @@
           and build solutions that make a real difference.
         </p>
         <div class="mt-4">
-          <a href="resume.pdf" class="btn btn-primary me-2" style="background:var(--theme); border:none;" target="_blank">Download Resume</a>
+          <a href="resume.pdf" class="btn btn-primary me-2" style="background:var(--theme); border:none;" target="_blank">Download CV</a>
           <a href="#contact" class="btn btn-outline-primary" style="border-color:var(--theme); color:var(--theme);">Let's Connect</a>
         </div>
       </div>
@@ -449,7 +510,7 @@
           <div class="row g-4">
             <div class="col-md-6 d-flex" data-aos="zoom-in" data-aos-delay="100">
               <div class="card project-card flex-fill">
-                <img src="hemoscan.png" class="card-img-top" alt="HemoScan AI">
+                <img src="hemoscan.jpg" class="card-img-top" alt="HemoScan AI">
                 <div class="card-body">
                   <h5 class="card-title fw-bold">HemoScan AI</h5>
                   <p class="text-muted mb-2">
@@ -494,8 +555,6 @@
     </div>
   </div>
 </section>
-
-<!-- CERTIFICATIONS -->
 <section id="certifications" class="py-5" style="background:var(--bg-soft);">
   <div class="container">
     <h2 class="text-center mb-5" style="color:var(--theme); font-weight:700;" data-aos="fade-down">Certifications</h2>
@@ -506,11 +565,14 @@
         <div class="card shadow-sm border-0 flex-fill text-center cert-card" data-bs-toggle="modal" data-bs-target="#cert1Modal">
           <div class="card-body">
             <h5 class="card-title fw-bold">
-              <!-- heading link triggers modal too -->
               <a class="cert-link" data-bs-toggle="modal" data-bs-target="#cert1Modal">Blockchain and Its Applications</a>
             </h5>
             <p class="text-muted mb-2">Swayam NPTEL</p>
             <p class="card-text">Certified for completing the course on blockchain fundamentals, smart contracts, and its applications.</p>
+
+            <div class="cert-action d-flex align-items-center justify-content-center mt-3">
+              <a class="btn btn-view-cert ms-2" data-bs-toggle="modal" data-bs-target="#cert1Modal">View certificate</a>
+            </div>
           </div>
         </div>
       </div>
@@ -524,6 +586,10 @@
             </h5>
             <p class="text-muted mb-2">Infosys Springboard</p>
             <p class="card-text">Selected for Cohort 3 of the Pragati Path program to enhance future-ready skills and career preparation.</p>
+
+            <div class="cert-action d-flex align-items-center justify-content-center mt-3">
+              <a class="btn btn-view-cert ms-2" data-bs-toggle="modal" data-bs-target="#cert2Modal">View certificate</a>
+            </div>
           </div>
         </div>
       </div>
@@ -537,6 +603,10 @@
             </h5>
             <p class="text-muted mb-2">Infosys Springboard</p>
             <p class="card-text">Learned the core concepts of generative AI models, their applications, and ethical considerations.</p>
+
+            <div class="cert-action d-flex align-items-center justify-content-center mt-3">
+              <a class="btn btn-view-cert ms-2" data-bs-toggle="modal" data-bs-target="#cert3Modal">View certificate</a>
+            </div>
           </div>
         </div>
       </div>
@@ -550,93 +620,144 @@
             </h5>
             <p class="text-muted mb-2">Certification Course</p>
             <p class="card-text">Completed hands-on training in applying Generative AI techniques for real-world problem solving.</p>
+
+            <div class="cert-action d-flex align-items-center justify-content-center mt-3">
+              <a class="btn btn-view-cert ms-2" data-bs-toggle="modal" data-bs-target="#cert4Modal">View certificate</a>
+            </div>
           </div>
         </div>
       </div>
 
-    </div>
-  </div>
+      <!-- NEW Cert 5 (Centered) -->
+      <div class="col-12 d-flex justify-content-center" data-aos="flip-left" data-aos-delay="500">
+        <div class="card shadow-sm border-0 cert-card cert-card--center text-center" data-bs-toggle="modal" data-bs-target="#cert5Modal">
+          <div class="card-body">
+            <h5 class="card-title fw-bold">
+              <a class="cert-link" data-bs-toggle="modal" data-bs-target="#cert5Modal">Introduction to Industry 4.o and Industrial Internet of Things</a>
+            </h5>
+            <p class="text-muted mb-2"></p>Swayam NPTEL</p>
+           <p class="text-muted">Introduction to Industry 4.0 and Industrial Internet of Things — explored Industry 4.0 fundamentals, IIoT architecture, smart manufacturing, and real-world industrial applications.</p>
+
+            <div class="cert-action d-flex align-items-center justify-content-center">
+          
+              <a class="btn btn-view-cert ms-2" data-bs-toggle="modal" data-bs-target="#cert5Modal">View certificate</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div> <!-- /.row -->
+  </div> <!-- /.container -->
 </section>
 
-<!-- CERTIFICATE MODALS -->
+
+
+<!-- Cert 1 Modal (you provided this image: nptel.png) -->
 <div class="modal fade" id="cert1Modal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content border-0">
       <div class="modal-header border-0">
-        <!-- built-in cross/close -->
+        <h5 class="modal-title fw-bold">Blockchain and Its Applications — Swayam NPTEL</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body text-center">
-        <img src="nptel.png" class="img-fluid rounded" alt="Blockchain Certificate">
+        <img src="nptel.png" class="img-fluid rounded mb-3" alt="Blockchain and Its Applications — Swayam NPTEL">
       </div>
     </div>
   </div>
 </div>
 
+<!-- Cert 2 Modal -->
 <div class="modal fade" id="cert2Modal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content border-0">
       <div class="modal-header border-0">
+        <h5 class="modal-title fw-bold">Pragati Path to Future - Cohort 3 — Infosys Springboard</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body text-center">
-        <img src="pragathi.png" class="img-fluid rounded" alt="Pragati Path Certificate">
+        <!-- replace with your image path -->
+        <img src="pragathi.png" class="img-fluid rounded mb-3" alt="Pragati Path to Future - Cohort 3">
       </div>
     </div>
   </div>
 </div>
 
+<!-- Cert 3 Modal -->
 <div class="modal fade" id="cert3Modal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content border-0">
       <div class="modal-header border-0">
+        <h5 class="modal-title fw-bold">Principles of Generative AI — Infosys Springboard</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body text-center">
-        <img src="principles.png" class="img-fluid rounded" alt="Generative AI Certificate">
+        <!-- replace with your image path -->
+        <img src="principles.png" class="img-fluid rounded mb-3" alt="Principles of Generative AI">
       </div>
     </div>
   </div>
 </div>
 
+<!-- Cert 4 Modal -->
 <div class="modal fade" id="cert4Modal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg">
     <div class="modal-content border-0">
       <div class="modal-header border-0">
+        <h5 class="modal-title fw-bold">Applied GenAI Certification — Certification Course</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body text-center">
-        <img src="Appliedgenai.png" class="img-fluid rounded" alt="Applied GenAI Certificate">
+        <!-- replace with your image path -->
+        <img src="Appliedgenai.png" class="img-fluid rounded mb-3" alt="Applied GenAI Certification">
+        
       </div>
     </div>
   </div>
 </div>
+
+<!-- Cert 5 Modal (NEW) -->
+<div class="modal fade" id="cert5Modal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content border-0">
+      <div class="modal-header border-0">
+        <h5 class="modal-title fw-bold">Principles of Generative AI — Infosys Springboard</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <!-- replace with your image path for the 5th cert -->
+        <img src="blockchain.png" class="img-fluid rounded mb-3" alt="Principles of Generative AI">
+    
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <!-- CONTACT -->
 <section id="contact" class="py-5" style="background:#fefcf9;" data-aos="zoom-in">
   <div class="container text-center">
     <h2 class="fw-bold mb-3" style="color:#000;">Contact Me</h2>
-    <h4>
-      <a href="mailto:sandhiyamurugesan226@gmail.com" class="text-decoration-none" style="color:var(--theme);">
-        sandhiyamurugesan226@gmail.com
-      </a>
-      <button id="copyEmailBtn" class="btn btn-sm btn-outline-primary ms-2">
-        <i class="fas fa-clipboard"></i>
-      </button>
-    </h4>
     <p class="text-muted mb-4">Feel free to contact me with any inquiries or questions!</p>
 
     <div class="mt-4">
       <a href="https://www.linkedin.com/in/sandhiya-murugesan-a0ab8728a/" target="_blank" class="mx-3 social-link"><i class="fab fa-linkedin fa-2x"></i></a>
       <a href="https://github.com/Sandhiyamurugesan2206" target="_blank" class="mx-3 social-link"><i class="fab fa-github fa-2x"></i></a>
-      <a href="https://www.instagram.com/sandhiya._.murugesan" target="_blank" class="mx-3 social-link"><i class="fab fa-instagram fa-2x"></i></a>
+<a href="https://wa.me/916374842998" target="_blank" class="mx-3 social-link">
+  <i class="fab fa-whatsapp fa-2x"></i>
+</a>
+<a href="mailto:sandhiyamurugesan226@gmail.com" class="mx-3 social-link">
+  <i class="fas fa-envelope fa-2x"></i>
+</a>
+
+
     </div>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <p>© 2025 Sandhiya M | All Rights Reserved</p>
+  <p>© 2025 Sandhiya M</p>
   <p>
     <a href="https://github.com/Sandhiyamurugesan2206" target="_blank">GitHub</a> |
     <a href="https://www.linkedin.com/in/sandhiya-murugesan-a0ab8728a/" target="_blank">LinkedIn</a> |
@@ -716,6 +837,4 @@
 
 </body>
 </html>
-
-
 
